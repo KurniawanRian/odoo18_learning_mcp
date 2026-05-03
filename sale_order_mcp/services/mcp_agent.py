@@ -155,10 +155,17 @@ class OdooMCPAgent:
         Gunakan Gemini AI untuk menganalisis prompt user,
         ambil data relevan dari Odoo, lalu berikan jawaban.
         """
-        if not self.gemini_api_key:
+        # Ambil API key dari Odoo System Parameters via JSON-RPC
+        api_key = self.odoo.execute(
+            "ir.config_parameter",
+            "get_param",
+            ["gemini.api_key"]
+        )
+        print("DEBUG: API Key from Config: ", api_key)
+
+        if not api_key:
             return {
-                "error": "API Key Gemini belum diatur. "
-                         "Set environment variable GEMINI_API_KEY atau isi langsung di kode."
+                "error": "API Key Gemini belum diatur. Masuk ke Settings > Technical > System Parameters dan tambahkan 'gemini.api_key'."
             }
 
         # 1. Ambil data dari Odoo untuk konteks AI
@@ -183,11 +190,11 @@ class OdooMCPAgent:
         except Exception as e:
             return {"error": f"Gagal mengambil data dari Odoo: {str(e)}"}
 
-        # 2. Konfigurasi Gemini SDK
-        genai.configure(api_key=self.gemini_api_key)
+        # 2. Konfigurasi Gemini SDK dengan api_key dari Odoo
+        genai.configure(api_key=api_key)
 
         # 3. Buat model Gemini
-        model = genai.GenerativeModel('gemini-2.0-flash')
+        model = genai.GenerativeModel('gemini-2.5-flash')
 
         # 4. Susun prompt dengan konteks data Odoo
         ai_prompt = f"""
