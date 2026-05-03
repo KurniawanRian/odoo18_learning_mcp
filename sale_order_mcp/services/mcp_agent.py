@@ -161,7 +161,6 @@ class OdooMCPAgent:
             "get_param",
             ["gemini.api_key"]
         )
-        print("DEBUG: API Key from Config: ", api_key)
 
         if not api_key:
             return {
