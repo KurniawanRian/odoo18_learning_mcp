@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "MCP Sale Order",
+    'name': "Sale Order MCP",
 
-    'summary': "MCP Sale Order",
+    'summary': "Sale Order MCP",
 
     'description': """
-        MCP Sale Order Module
+        Sale Order MCP Module
     """,
 
     'author': "Rian Kurniawan",
@@ -30,8 +30,8 @@
         'views/templates.xml',
     ],
     # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
+    # 'demo': [
+    #     'demo/demo.xml',
+    # ],
 }
 
