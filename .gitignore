@@ -1,0 +1,15 @@
+# Odoo configurations
+odoo.conf
+*.conf
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+venv/
+ENV/
+
+# OS specific
+.DS_Store
+Thumbs.db
